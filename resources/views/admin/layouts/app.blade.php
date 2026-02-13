@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --primary-red: #eb0a1e;
@@ -34,7 +34,7 @@
             overflow-x: hidden;
             font-size: 14px;
         }
-        
+
         /* Sidebar Styling */
         #sidebar {
             position: fixed;
@@ -49,43 +49,45 @@
             z-index: 1000;
             overflow-y: auto;
         }
-        
+
         #sidebar::-webkit-scrollbar {
             width: 4px;
         }
-        
+
         #sidebar::-webkit-scrollbar-thumb {
             background: rgba(0, 0, 0, 0.15);
             border-radius: 10px;
         }
-        
+
         #sidebar.collapsed {
             margin-left: calc(-1 * var(--sidebar-width));
         }
-        
+
         .sidebar-header {
             padding: 14px 14px;
             background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
             border-bottom: 1px solid var(--sidebar-border);
+            text-align: center;
         }
-        
+
         .sidebar-header img {
-            height: 32px;
+            text-align: center;
+            height: 50px;
             filter: brightness(0) invert(1);
             transition: transform 0.3s ease;
         }
-        
+
         .sidebar-header img:hover {
             transform: scale(1.05);
         }
-        
+
         /* User Profile in Sidebar */
         .sidebar-user {
             padding: 12px 14px;
             background: #fff5f5;
             border-bottom: 1px solid var(--sidebar-border);
         }
-        
+
         .sidebar-user .user-avatar {
             width: 34px;
             height: 34px;
@@ -100,13 +102,13 @@
             box-shadow: 0 3px 8px rgba(235, 10, 30, 0.25);
             flex-shrink: 0;
         }
-        
+
         .sidebar-user .user-info {
             color: #333;
             margin-left: 8px;
             overflow: hidden;
         }
-        
+
         .sidebar-user .user-name {
             font-size: 12px;
             font-weight: 600;
@@ -115,12 +117,12 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        
+
         .sidebar-user .user-role {
             font-size: 11px;
             color: #999;
         }
-        
+
         /* Section Label */
         .sidebar-section-label {
             padding: 14px 14px 6px;
@@ -136,11 +138,11 @@
             padding: 4px 0;
             list-style: none;
         }
-        
+
         #sidebar ul li {
             margin: 2px 6px;
         }
-        
+
         #sidebar ul li a {
             padding: 9px 12px;
             font-size: 12px;
@@ -154,18 +156,18 @@
             border-radius: 7px;
             border-left: none;
         }
-        
+
         #sidebar ul li a:hover {
             color: var(--primary-red);
             background: #fff0f0;
         }
-        
+
         #sidebar ul li a.active {
             color: white;
             background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
             box-shadow: 0 3px 12px rgba(235, 10, 30, 0.25);
         }
-        
+
         #sidebar ul li a i {
             margin-right: 8px;
             font-size: 14px;
@@ -201,7 +203,7 @@
             margin-right: 6px;
             font-size: 13px;
         }
-        
+
         /* Main Content Area */
         #content {
             margin-left: var(--sidebar-width);
@@ -210,12 +212,12 @@
             transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             width: calc(100% - var(--sidebar-width));
         }
-        
+
         #content.expanded {
             margin-left: 0;
             width: 100%;
         }
-        
+
         /* Top Navbar */
         .navbar-admin {
             background: rgba(255, 255, 255, 0.95);
@@ -226,7 +228,7 @@
             padding: 12px 20px;
             margin-bottom: 24px;
         }
-        
+
         .navbar-admin .btn-toggle {
             background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
             border: none;
@@ -237,7 +239,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 3px 10px rgba(235, 10, 30, 0.25);
         }
-        
+
         .navbar-admin .btn-toggle:hover {
             transform: translateY(-1px);
             box-shadow: 0 5px 15px rgba(235, 10, 30, 0.35);
@@ -249,7 +251,7 @@
             color: #333;
             margin-left: 12px;
         }
-        
+
         .navbar-admin .dropdown-toggle {
             background: transparent;
             border: none;
@@ -260,7 +262,7 @@
             border-radius: 8px;
             transition: all 0.3s ease;
         }
-        
+
         .navbar-admin .dropdown-toggle:hover {
             background: rgba(235, 10, 30, 0.06);
         }
@@ -268,7 +270,7 @@
         .navbar-admin .dropdown-toggle::after {
             margin-left: 6px;
         }
-        
+
         .navbar-admin .user-avatar-small {
             width: 34px;
             height: 34px;
@@ -282,7 +284,7 @@
             font-size: 13px;
             box-shadow: 0 2px 8px rgba(235, 10, 30, 0.25);
         }
-        
+
         .dropdown-menu {
             border: none;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
@@ -290,7 +292,7 @@
             padding: 6px;
             margin-top: 8px;
         }
-        
+
         .dropdown-item {
             border-radius: 6px;
             padding: 8px 14px;
@@ -298,17 +300,17 @@
             font-weight: 500;
             font-size: 13px;
         }
-        
+
         .dropdown-item:hover {
             background: rgba(235, 10, 30, 0.06);
         }
-        
+
         .dropdown-item.text-danger:hover {
             background: rgba(235, 10, 30, 0.1);
         }
 
         /* ========================================
-           GLOBAL ADMIN STYLES 
+           GLOBAL ADMIN STYLES
            ======================================== */
 
         /* Page Headers */
@@ -568,18 +570,18 @@
             #sidebar {
                 margin-left: calc(-1 * var(--sidebar-width));
             }
-            
+
             #sidebar.active {
                 margin-left: 0;
             }
-            
+
             #content {
                 margin-left: 0;
                 width: 100%;
                 padding: 16px;
             }
         }
-        
+
         @media (max-width: 768px) {
             #content {
                 padding: 12px;
@@ -619,7 +621,7 @@
                 width: 100%;
                 max-width: var(--sidebar-width);
             }
-            
+
             #content {
                 padding: 10px;
             }
@@ -646,16 +648,6 @@
                 <a href="{{ route('admin.dashboard') }}">
                     <img src="{{ asset('assets/img/kybLogo.png') }}" alt="KYB Logo">
                 </a>
-            </div>
-
-            <div class="sidebar-user d-flex align-items-center">
-                <div class="user-avatar">
-                    {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
-                </div>
-                <div class="user-info">
-                    <div class="user-name">{{ Auth::user()->name ?? 'Admin' }}</div>
-                    <div class="user-role">Administrator</div>
-                </div>
             </div>
 
             <div class="sidebar-section-label">Main Menu</div>
@@ -697,7 +689,7 @@
                     <button type="button" id="sidebarToggle" class="btn btn-toggle me-3">
                         <i class="bi bi-list"></i>
                     </button>
-                    
+
                     <div class="d-flex align-items-center ms-auto">
                         <div class="dropdown">
                             <button class="dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
@@ -732,7 +724,7 @@
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebar = document.getElementById('sidebar');
         const content = document.getElementById('content');
-        
+
         sidebarToggle.addEventListener('click', function () {
             if (window.innerWidth <= 992) {
                 sidebar.classList.toggle('active');
@@ -741,7 +733,7 @@
                 content.classList.toggle('expanded');
             }
         });
-        
+
         // Close sidebar when clicking outside on mobile
         document.addEventListener('click', function(event) {
             if (window.innerWidth <= 992) {

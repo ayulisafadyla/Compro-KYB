@@ -3,6 +3,9 @@
 @section('content')
 <div class="login-container">
     <div class="glass-card text-center">
+        <div class="text-center">
+            <img src="{{ asset ('images/kyb-remove1.png') }}" alt="Logo" style="width: 80px;">
+        </div>
         <h2 class="fw-bold mb-1" style="font-size: 1.2rem; color: #333;">Verifikasi OTP</h2>
         <p class="text-muted mb-3" style="font-size: 0.8rem;">Masukkan Kode OTP Yang Telah Dikirim</p>
 
@@ -64,7 +67,7 @@
             const value = e.target.value;
             // Hanya angka
             e.target.value = value.replace(/[^0-9]/g, '');
-            
+
             if (e.target.value && index < otpBoxes.length - 1) {
                 otpBoxes[index + 1].focus();
             }
@@ -107,7 +110,7 @@
     // Timer Countdown
     const timerEl = document.getElementById('timer');
     const resendSection = document.getElementById('resendSection');
-    
+
     @if($expiresAt)
         let remaining = Math.max(0, {{ $expiresAt }} - Math.floor(Date.now() / 1000));
     @else
@@ -150,7 +153,7 @@
         justify-content: center;
         position: relative;
     }
-    
+
     .login-container::before {
         content: '';
         position: absolute;
@@ -158,7 +161,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.1); 
+        background: rgba(0, 0, 0, 0.1);
         z-index: 0;
     }
 
@@ -183,7 +186,7 @@
             padding: 20px 24px;
         }
     }
-    
+
     @media (max-width: 767px) {
         .glass-card {
             max-width: 320px;
@@ -221,7 +224,7 @@
 
     /* Button */
     .glass-btn {
-        background: #eb0a1e; 
+        background: #eb0a1e;
         border: none;
         border-radius: 30px;
         padding: 10px;
@@ -231,7 +234,7 @@
         color: white;
         transition: all 0.3s ease;
     }
-    
+
     .glass-btn:hover {
         background: #c9081a;
         transform: translateY(-2px);

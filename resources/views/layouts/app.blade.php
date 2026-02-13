@@ -75,9 +75,6 @@
             transform: translateY(-2px);
         }
 
-
-
-
         .dropdown-item img {
             width: 22px;
             height: auto;
@@ -159,8 +156,6 @@
                 padding: 20px;
                 border-top: 1px solid #eee;
             }
-
-
 
             .btn-login-toyota {
                 justify-content: center;
@@ -340,7 +335,7 @@
                     <a href="/login" class="btn-login-toyota">
                         <i class="bi bi-box-arrow-in-right"></i> Masuk
                     </a>
-                    
+
                 </div>
             </div>
         </div>
@@ -412,14 +407,14 @@
 
         <div class="container footer-bottom clearfix">
             <div class="copyright">
-                &copy; Copyright <strong><span>PT Kayaba Indonesia</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>2026 PT Kayaba Indonesia</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-                Designed by <a href="#">IT Dept KYB</a>
+                Designed by <a href="#">MIS Dept KYB</a>
             </div>
         </div>
     </footer>
@@ -553,19 +548,19 @@
             font-size: 13px;
             color: rgba(255, 255, 255, 0.8);
         }
-        
+
         .footer-dark .credits a {
             color: #fff;
             text-decoration: none;
             font-weight: 600;
         }
-        
+
         @media (max-width: 768px) {
             .footer-dark .footer-bottom {
                 padding-top: 20px;
                 padding-bottom: 20px;
             }
-            
+
             .footer-dark .footer-contact {
                 text-align: left !important;
                 margin-top: 20px;
