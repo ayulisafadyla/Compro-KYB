@@ -1,6 +1,5 @@
 <div align="center">
-  <img src="[https://via.placeholder.com/1200x400/0d47a1/FFFFFF?text=PT+Kayaba+Indonesia+Digital+Platform](https://tse1.mm.bing.net/th/id/OIP.bSkBUYT3B94DolkY-MaTwQAAAA?rs=1&pid=ImgDetMain&o=7&rm=3)" alt="Banner PT Kayaba Indonesia" width="100%"/>
-  
+    
   <h1>Official Website & Admin Panel<br/>PT Kayaba Indonesia</h1>
   
   <p>
