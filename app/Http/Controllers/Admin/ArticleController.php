@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\HandleImageUpload;
 
 class ArticleController extends Controller
 {
+    use HandleImageUpload;
+
     public function index(Request $request)
     {
         $query = Article::query();
@@ -44,13 +47,13 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'is_published' => 'boolean',
         ]);
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('articles', 'public');
+            $validated['image'] = $this->uploadAndConvertToWebp($request->file('image'), 'articles');
         }
 
         $validated['is_published'] = $request->has('is_published');
@@ -76,17 +79,14 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'is_published' => 'boolean',
         ]);
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete old image
-            if ($article->image) {
-                Storage::disk('public')->delete($article->image);
-            }
-            $validated['image'] = $request->file('image')->store('articles', 'public');
+            $this->deleteImage($article->image);
+            $validated['image'] = $this->uploadAndConvertToWebp($request->file('image'), 'articles');
         }
 
         $validated['is_published'] = $request->has('is_published');
@@ -100,9 +100,7 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         // Delete image
-        if ($article->image) {
-            Storage::disk('public')->delete($article->image);
-        }
+        $this->deleteImage($article->image);
 
         $article->delete();
 

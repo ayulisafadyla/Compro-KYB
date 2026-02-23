@@ -50,36 +50,53 @@
                         <textarea class="form-control @error('description') is-invalid @enderror" 
                                   id="description" 
                                   name="description" 
-                                  rows="5" 
+                                  rows="3" 
                                   required>{{ old('description') }}</textarea>
                         @error('description')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="usage" class="form-label">Usage / Application</label>
+                        <textarea class="form-control @error('usage') is-invalid @enderror" 
+                                  id="usage" 
+                                  name="usage" 
+                                  rows="3">{{ old('usage') }}</textarea>
+                        <small class="text-muted">Explain how this product should be used (e.g., "Ideal for city cars").</small>
+                        @error('usage')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="features" class="form-label">Key Features</label>
+                        <input type="text" 
+                               class="form-control @error('features') is-invalid @enderror" 
+                               id="features" 
+                               name="features" 
+                               value="{{ old('features') }}"
+                               placeholder="Feature 1, Feature 2, Feature 3">
+                        <small class="text-muted">Separate features with commas (e.g., "Durable, Light, OEM Quality").</small>
+                        @error('features')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Price (Rp)</label>
-                        <input type="number" 
-                               class="form-control @error('price') is-invalid @enderror" 
-                               id="price" 
-                               name="price" 
-                               value="{{ old('price') }}"
-                               step="0.01"
-                               min="0">
-                        @error('price')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
 
                     <div class="mb-3">
                         <label for="image" class="form-label">Product Image</label>
+                        <div class="mb-2" id="preview-container" style="display: none;">
+                            <img id="image-preview" src="#" class="rounded shadow-sm" style="max-width: 100%; height: 150px; object-fit: cover;">
+                        </div>
                         <input type="file" 
                                class="form-control @error('image') is-invalid @enderror" 
                                id="image" 
                                name="image"
-                               accept="image/*">
+                               accept="image/*"
+                               onchange="previewImage(this)">
                         @error('image')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -113,4 +130,23 @@
         </form>
     </div>
 </div>
+@push('scripts')
+<script>
+function previewImage(input) {
+    const preview = document.getElementById('image-preview');
+    const container = document.getElementById('preview-container');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            container.style.display = 'block';
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+@endpush
 @endsection

@@ -1,11 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+    .list-group-item {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .list-group-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        background-color: #fff;
+        z-index: 1;
+    }
+</style>
+
 <div class="container py-5" style="min-height: 60vh;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h1 class="mb-4 fw-bold">Hasil Pencarian</h1>
-            
+
             <form action="/search" method="GET" class="mb-5">
                 <div class="input-group">
                     <input type="text" name="q" class="form-control form-control-lg" placeholder="Cari lagi..." value="{{ $query ?? '' }}">
@@ -46,15 +59,4 @@
     </div>
 </div>
 
-<style>
-    .list-group-item {
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .list-group-item:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
-        background-color: #fff;
-        z-index: 1;
-    }
-</style>
 @endsection

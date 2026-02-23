@@ -3,7 +3,7 @@
 @section('content')
 <div class="row mb-3">
     <div class="col-md-6">
-        <h2>Categories</h2>
+        <h2>Kategori Produk</h2>
     </div>
     <div class="col-md-6 text-end">
         <a href="{{ route('admin.categories.create') }}" class="btn btn-danger">
@@ -32,7 +32,7 @@
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>No</th>
                         <th>Name</th>
                         <th>Slug</th>
                         <th>Products</th>
@@ -55,7 +55,7 @@
                             <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" 
+                                <button type="submit" class="btn btn-sm btn-danger"
                                         onclick="return confirm('Are you sure?')">
                                     <i class="bi bi-trash"></i>
                                 </button>
@@ -70,7 +70,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <div class="mt-3">
             {{ $categories->links() }}
         </div>

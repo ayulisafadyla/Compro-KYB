@@ -175,6 +175,48 @@
             text-align: center;
         }
 
+        /* Sidebar Submenu */
+        .sidebar-dropdown-toggle::after {
+            display: inline-block;
+            margin-left: auto;
+            vertical-align: 0.255em;
+            content: "";
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-bottom: 0;
+            border-left: 0.3em solid transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-dropdown-toggle[aria-expanded="true"]::after {
+            transform: rotate(180deg);
+        }
+
+        #sidebar ul.collapse {
+            background: #fcfcfc;
+            margin: 0 6px 4px 18px;
+            border-radius: 0 0 7px 7px;
+            border-left: 1px dashed #eee;
+        }
+
+        #sidebar ul.collapse li a {
+            padding: 7px 12px;
+            font-size: 11px;
+            color: #777;
+        }
+
+        #sidebar ul.collapse li a:hover {
+            color: var(--primary-red);
+            background: #fff5f5;
+        }
+
+        #sidebar ul.collapse li a.active {
+            color: var(--primary-red);
+            background: #fff0f0;
+            font-weight: 600;
+            box-shadow: none;
+        }
+
         /* Sidebar Footer */
         .sidebar-footer {
             position: absolute;
@@ -650,7 +692,6 @@
                 </a>
             </div>
 
-            <div class="sidebar-section-label">Main Menu</div>
 
             <ul class="components">
                 <li>
@@ -658,21 +699,90 @@
                         <i class="bi bi-grid-1x2-fill"></i> Dashboard
                     </a>
                 </li>
+
+                <div class="sidebar-section-label">Main Menu</div>
                 <li>
-                    <a href="{{ route('admin.categories.index') }}" class="{{ Request::is('admin/categories*') ? 'active' : '' }}">
-                        <i class="bi bi-tags-fill"></i> Categories
+                    <a href="#berandaSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="sidebar-dropdown-toggle {{ Request::is('admin/banners*', 'admin/home-abouts*', 'admin/home-about-images*', 'admin/home-videos*', 'admin/home-philosophies*') ? 'active' : '' }}">
+                        <i class="bi bi-house-door-fill"></i> Beranda
                     </a>
+
+                    <ul class="collapse list-unstyled {{ Request::is('admin/banners*', 'admin/home-abouts*', 'admin/home-about-images*', 'admin/home-videos*', 'admin/home-philosophies*') ? 'show' : '' }}" id="berandaSubmenu">
+                        <li><a href="{{ route('admin.banners.index') }}" class="{{ Request::is('admin/banners*') ? 'active' : '' }}">Hero Carousel</a></li>
+                        <li><a href="{{ route('admin.home-abouts.index') }}" class="{{ Request::is('admin/home-abouts*') ? 'active' : '' }}">About Us</a></li>
+                        <li><a href="{{ route('admin.home-about-images.edit') }}" class="{{ Request::is('admin/home-about-images*') ? 'active' : '' }}">Company Images</a></li>
+                        <li><a href="{{ route('admin.home-videos.index') }}" class="{{ Request::is('admin/home-videos*') ? 'active' : '' }}">Video Banner</a></li>
+                    </ul>
                 </li>
+
                 <li>
-                    <a href="{{ route('admin.products.index') }}" class="{{ Request::is('admin/products*') ? 'active' : '' }}">
-                        <i class="bi bi-box-seam-fill"></i> Products
+                    <a href="#produkSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="sidebar-dropdown-toggle {{ Request::is('admin/categories*', 'admin/products*', 'admin/brands*') ? 'active' : '' }}">
+                        <i class="bi bi-box-seam-fill"></i> Produk
                     </a>
+                    <ul class="collapse list-unstyled {{ Request::is('admin/categories*', 'admin/products*', 'admin/brands*') ? 'show' : '' }}" id="produkSubmenu">
+                        <li><a href="{{ route('admin.categories.index') }}" class="{{ Request::is('admin/categories*') ? 'active' : '' }}">Kategori Produk</a></li>
+                        <li><a href="{{ route('admin.products.index') }}" class="{{ Request::is('admin/products*') ? 'active' : '' }}">Daftar Produk</a></li>
+                        <li><a href="{{ route('admin.brands.index') }}" class="{{ Request::is('admin/brands*') ? 'active' : '' }}">Brand Logo</a></li>
+                    </ul>
                 </li>
+
                 <li>
-                    <a href="{{ route('admin.articles.index') }}" class="{{ Request::is('admin/articles*') ? 'active' : '' }}">
-                        <i class="bi bi-newspaper"></i> Articles
+                    <a href="#eventSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="sidebar-dropdown-toggle {{ Request::is('admin/events*') ? 'active' : '' }}">
+                        <i class="bi bi-calendar-event-fill"></i> Pencapaian
                     </a>
+                    <ul class="collapse list-unstyled {{ Request::is('admin/events*') ? 'show' : '' }}" id="eventSubmenu">
+                        <li><a href="{{ route('admin.events.index', ['type' => 'promo']) }}" class="{{ request('type') == 'promo' ? 'active' : '' }}">Sertifikat</a></li>
+                        <li><a href="{{ route('admin.events.index', ['type' => 'workshop']) }}" class="{{ request('type') == 'workshop' ? 'active' : '' }}">Penghargaan</a></li>
+                        <li><a href="{{ route('admin.events.index', ['type' => 'launch']) }}" class="{{ request('type') == 'launch' ? 'active' : '' }}">Daftar Events</a></li>
+                    </ul>
                 </li>
+
+                <li>
+                    <a href="#staticSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="sidebar-dropdown-toggle {{ request()->routeIs('admin.faqs.*', 'admin.about-sections.*', 'admin.contact-items.*', 'admin.policy-sections.*') ? 'active' : '' }}">
+                        <i class="bi bi-file-earmark-text-fill"></i> Halaman Statis
+                    </a>
+                    <ul class="collapse list-unstyled {{ request()->routeIs('admin.faqs.*', 'admin.about-sections.*', 'admin.contact-items.*', 'admin.policy-sections.*') ? 'show' : '' }}" id="staticSubmenu">
+                    <li><a href="{{ route('admin.faqs.index') }}" class="{{ request()->routeIs('admin.faqs.*') ? 'active' : '' }}">FAQ</a></li>
+                        <li><a href="{{ route('admin.contact-items.index') }}" class="{{ request()->routeIs('admin.contact-items.*') ? 'active' : '' }}">Kontak Kami</a></li>
+                    </ul>
+                </li>
+
+                @if(Auth::user()->role && Auth::user()->role->slug === 'super-admin')
+                <li>
+                    <a href="#userSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="sidebar-dropdown-toggle {{ Request::is('admin/users*', 'admin/roles*', 'admin/security*') ? 'active' : '' }}">
+                        <i class="bi bi-people-fill"></i> Pengguna
+                    </a>
+                    <ul class="collapse list-unstyled {{ Request::is('admin/users*', 'admin/roles*', 'admin/security*') ? 'show' : '' }}" id="userSubmenu">
+                        <li><a href="{{ route('admin.users.index') }}" class="{{ Request::is('admin/users*') ? 'active' : '' }}">Admin Users</a></li>
+                        <li><a href="{{ route('admin.roles.index') }}" class="{{ Request::is('admin/roles*') ? 'active' : '' }}">Role & Permissions</a></li>
+                    </ul>
+                </li>
+                @endif
+
+                @if(Auth::user()->role && Auth::user()->role->slug === 'super-admin')
+                <li>
+                    <a href="#settingSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="sidebar-dropdown-toggle {{ Request::is('admin/settings*') ? 'active' : '' }}">
+                        <i class="bi bi-gear-fill"></i> Pengaturan Website
+                    </a>
+                    <ul class="collapse list-unstyled {{ Request::is('admin/settings*') ? 'show' : '' }}" id="settingSubmenu">
+                        <li><a href="{{ route('admin.settings.index', ['group' => 'general']) }}" class="{{ request('group') == 'general' ? 'active' : '' }}">General Setting</a></li>
+                        <li><a href="{{ route('admin.settings.index', ['group' => 'seo']) }}" class="{{ request('group') == 'seo' ? 'active' : '' }}">SEO & Meta</a></li>
+                        <li><a href="{{ route('admin.settings.index', ['group' => 'analytics']) }}" class="{{ request('group') == 'analytics' ? 'active' : '' }}">Google Analytics</a></li>
+                        <li><a href="{{ route('admin.settings.index', ['group' => 'maintenance']) }}" class="{{ request('group') == 'maintenance' ? 'active' : '' }}">Maintenance Mode</a></li>
+                    </ul>
+                </li>
+                @endif
+
+                @if(Auth::user()->role && Auth::user()->role->slug === 'super-admin')
+                <li>
+                    <a href="#logSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="sidebar-dropdown-toggle {{ Request::is('admin/logs*') ? 'active' : '' }}">
+                        <i class="bi bi-clock-history"></i> Log & Aktivitas
+                    </a>
+                    <ul class="collapse list-unstyled {{ Request::is('admin/logs*') ? 'show' : '' }}" id="logSubmenu">
+                        <li><a href="{{ route('admin.logs.activity') }}" class="{{ Request::is('admin/logs/activity*') ? 'active' : '' }}">Activity Log</a></li>
+                        <li><a href="{{ route('admin.logs.login') }}" class="{{ Request::is('admin/logs/login*') ? 'active' : '' }}">Login History</a></li>
+                    </ul>
+                </li>
+                @endif
             </ul>
 
             <div class="sidebar-footer">

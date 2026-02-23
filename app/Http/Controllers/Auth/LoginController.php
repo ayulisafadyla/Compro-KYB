@@ -13,12 +13,12 @@ class LoginController extends Controller
     {
         // Generate random alphanumeric captcha code
         $captchaCode = $this->generateCaptchaCode();
-        
+
         session(['captcha_code' => strtolower($captchaCode)]);
-        
+
         return view('auth.login', ['captchaCode' => $captchaCode]);
     }
-    
+
     private function generateCaptchaCode()
     {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -41,7 +41,7 @@ class LoginController extends Controller
         if (strtolower($request->captcha) != session('captcha_code')) {
             $captchaCode = $this->generateCaptchaCode();
             session(['captcha_code' => strtolower($captchaCode)]);
-            
+
             return back()->withErrors([
                 'captcha' => 'Kode CAPTCHA salah. Silakan coba lagi.',
             ])->onlyInput('username')->with('captchaCode', $captchaCode);
@@ -51,16 +51,24 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            
+
             // Clear captcha
             session()->forget('captcha_code');
-            
+
             // Set OTP belum terverifikasi
             session(['otp_verified' => false]);
 
             // Ambil user dari database langsung
             $user = \App\Models\User::where('username', $request->username)->first();
-            
+
+            // Record Login History
+            \App\Models\LoginHistory::create([
+                'user_id' => $user->id,
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'login_at' => now(),
+            ]);
+
             \Illuminate\Support\Facades\Log::info('LOGIN OTP DEBUG', [
                 'user_found' => $user ? true : false,
                 'user_id' => $user ? $user->id : null,
@@ -74,13 +82,13 @@ class LoginController extends Controller
                 'code' => '123456',
                 'expires_at' => now()->addMinutes(5),
             ]);
-            
+
             \Illuminate\Support\Facades\Log::info('OTP CREATED', [
                 'otp_id' => $otp->id,
                 'otp_user_id' => $otp->user_id,
                 'otp_code' => $otp->code,
             ]);
-            
+
             // Redirect ke halaman OTP
             return redirect()->route('otp.show');
         }
@@ -100,6 +108,12 @@ class LoginController extends Controller
         if (Auth::check()) {
             $userId = \App\Models\User::where('username', Auth::user()->username)->value('id');
             Otp::where('user_id', $userId)->delete();
+
+            // Record Logout Time
+            \App\Models\LoginHistory::where('user_id', $userId)
+                ->whereNull('logout_at')
+                ->latest()
+                ->first()?->update(['logout_at' => now()]);
         }
 
         Auth::logout();

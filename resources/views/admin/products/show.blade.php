@@ -58,10 +58,6 @@
 
                 <table class="table table-borderless">
                     <tr>
-                        <th width="150">Price:</th>
-                        <td>{{ $product->price ? 'Rp ' . number_format($product->price, 0, ',', '.') : 'Not set' }}</td>
-                    </tr>
-                    <tr>
                         <th>Slug:</th>
                         <td><code>{{ $product->slug }}</code></td>
                     </tr>

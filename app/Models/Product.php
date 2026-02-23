@@ -14,12 +14,15 @@ class Product extends Model
         'description',
         'price',
         'image',
+        'usage',
+        'features',
         'is_active',
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
         'is_active' => 'boolean',
+        'features' => 'array',
     ];
 
     /**

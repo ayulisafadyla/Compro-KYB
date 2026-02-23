@@ -21,7 +21,19 @@ class User extends Authenticatable
         'name',
         'username',
         'password',
+        'role_id',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasPermission($permissionSlug)
+    {
+        if (!$this->role) return false;
+        return $this->role->permissions->contains('slug', $permissionSlug);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -53,6 +65,6 @@ class User extends Authenticatable
      */
     public function getAuthIdentifierName()
     {
-        return 'username';
+        return 'id';
     }
 }

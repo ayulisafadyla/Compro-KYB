@@ -1,10 +1,128 @@
 @extends('layouts.guest')
 
 @section('content')
+
+<style>
+    /* Full Screen Background */
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    .login-container {
+        min-height: 100vh;
+        width: 100%;
+        background: url('{{ asset('assets/img/kyb1.png') }}') no-repeat center center;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .login-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        z-index: 0;
+    }
+
+    .glass-card {
+        width: 90%;
+        max-width: 380px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        position: relative;
+        padding: 24px 28px;
+        margin: 10px;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .glass-card {
+            max-width: 340px;
+            padding: 20px 24px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .glass-card {
+            max-width: 320px;
+            padding: 18px 20px;
+        }
+    }
+
+    /* OTP Input Boxes */
+    .otp-box {
+        width: 48px;
+        height: 52px;
+        text-align: center;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #333;
+        border: 1.5px solid #e0e0e0;
+        border-radius: 12px;
+        background: #fff;
+        outline: none;
+        transition: all 0.25s ease;
+    }
+
+    .otp-box:focus {
+        border-color: #eb0a1e;
+        box-shadow: 0 0 0 3px rgba(235, 10, 30, 0.1);
+    }
+
+    @media (max-width: 767px) {
+        .otp-box {
+            width: 42px;
+            height: 46px;
+            font-size: 1.1rem;
+        }
+    }
+
+    /* Button */
+    .glass-btn {
+        background: #eb0a1e;
+        border: none;
+        border-radius: 30px;
+        padding: 10px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .glass-btn:hover {
+        background: #c9081a;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(201, 8, 26, 0.3);
+    }
+
+    /* Timer Badge */
+    .timer-badge {
+        background: #eb0a1e;
+        color: white;
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 6px 16px;
+        border-radius: 20px;
+    }
+</style>
+
 <div class="login-container">
     <div class="glass-card text-center">
         <div class="text-center">
-            <img src="{{ asset ('images/kyb-remove1.png') }}" alt="Logo" style="width: 80px;">
+            <img src="{{ asset ('assets/img/kyb-remove1.png') }}" alt="Logo" style="width: 80px;">
         </div>
         <h2 class="fw-bold mb-1" style="font-size: 1.2rem; color: #333;">Verifikasi OTP</h2>
         <p class="text-muted mb-3" style="font-size: 0.8rem;">Masukkan Kode OTP Yang Telah Dikirim</p>
@@ -135,120 +253,4 @@
     updateTimer();
 </script>
 
-<style>
-    /* Full Screen Background */
-    body {
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-    }
-
-    .login-container {
-        min-height: 100vh;
-        width: 100%;
-        background: url('{{ asset('assets/img/kyb1.png') }}') no-repeat center center;
-        background-size: cover;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-    }
-
-    .login-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.1);
-        z-index: 0;
-    }
-
-    .glass-card {
-        width: 90%;
-        max-width: 380px;
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.8);
-        border-radius: 16px;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-        z-index: 1;
-        position: relative;
-        padding: 24px 28px;
-        margin: 10px;
-    }
-
-    @media (min-width: 768px) and (max-width: 1024px) {
-        .glass-card {
-            max-width: 340px;
-            padding: 20px 24px;
-        }
-    }
-
-    @media (max-width: 767px) {
-        .glass-card {
-            max-width: 320px;
-            padding: 18px 20px;
-        }
-    }
-
-    /* OTP Input Boxes */
-    .otp-box {
-        width: 48px;
-        height: 52px;
-        text-align: center;
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: #333;
-        border: 1.5px solid #e0e0e0;
-        border-radius: 12px;
-        background: #fff;
-        outline: none;
-        transition: all 0.25s ease;
-    }
-
-    .otp-box:focus {
-        border-color: #eb0a1e;
-        box-shadow: 0 0 0 3px rgba(235, 10, 30, 0.1);
-    }
-
-    @media (max-width: 767px) {
-        .otp-box {
-            width: 42px;
-            height: 46px;
-            font-size: 1.1rem;
-        }
-    }
-
-    /* Button */
-    .glass-btn {
-        background: #eb0a1e;
-        border: none;
-        border-radius: 30px;
-        padding: 10px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        color: white;
-        transition: all 0.3s ease;
-    }
-
-    .glass-btn:hover {
-        background: #c9081a;
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(201, 8, 26, 0.3);
-    }
-
-    /* Timer Badge */
-    .timer-badge {
-        background: #eb0a1e;
-        color: white;
-        font-size: 0.85rem;
-        font-weight: 600;
-        padding: 6px 16px;
-        border-radius: 20px;
-    }
-</style>
 @endsection

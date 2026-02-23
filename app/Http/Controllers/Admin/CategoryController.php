@@ -4,13 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
     public function index()
     {
         $categories = Category::withCount('products')->latest()->paginate(10);
+
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -26,7 +31,11 @@ class CategoryController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        Category::create($validated);
+        $validated['slug'] = Str::slug($request->name);
+
+        $category = Category::create($validated);
+
+        ActivityLog::log('CREATED', 'Categories', 'Created category: ' . $category->name);
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'Category created successfully.');
@@ -44,7 +53,13 @@ class CategoryController extends Controller
             'description' => 'nullable|string',
         ]);
 
+        if ($request->name !== $category->name) {
+            $validated['slug'] = Str::slug($request->name);
+        }
+
         $category->update($validated);
+
+        ActivityLog::log('UPDATED', 'Categories', 'Updated category: ' . $category->name);
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'Category updated successfully.');
@@ -56,7 +71,10 @@ class CategoryController extends Controller
             return back()->with('error', 'Cannot delete category with existing products.');
         }
 
+        $categoryName = $category->name;
         $category->delete();
+
+        ActivityLog::log('DELETED', 'Categories', 'Deleted category: ' . $categoryName);
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'Category deleted successfully.');

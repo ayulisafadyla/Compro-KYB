@@ -3,7 +3,7 @@
 @section('content')
 <div class="row mb-3">
     <div class="col-md-6">
-        <h2>Products</h2>
+        <h2>Daftar Produk</h2>
     </div>
     <div class="col-md-6 text-end">
         <a href="{{ route('admin.products.create') }}" class="btn btn-danger">
@@ -13,13 +13,13 @@
 </div>
 
 <!-- Search & Filter -->
-<div class="card shadow-sm border-0 mb-3">
+{{-- <div class="card shadow-sm border-0 mb-3">
     <div class="card-body">
         <form method="GET" action="{{ route('admin.products.index') }}">
             <div class="row g-3">
                 <div class="col-md-5">
-                    <input type="text" name="search" class="form-control" 
-                           placeholder="Search products..." 
+                    <input type="text" name="search" class="form-control"
+                           placeholder="Search products..."
                            value="{{ request('search') }}">
                 </div>
                 <div class="col-md-4">
@@ -40,7 +40,7 @@
             </div>
         </form>
     </div>
-</div>
+</div> --}}
 
 @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -55,11 +55,10 @@
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>No</th>
                         <th>Image</th>
                         <th>Name</th>
                         <th>Category</th>
-                        <th>Price</th>
                         <th>Status</th>
                         <th width="200">Actions</th>
                     </tr>
@@ -70,12 +69,12 @@
                         <td>{{ $loop->iteration + ($products->currentPage() - 1) * $products->perPage() }}</td>
                         <td>
                             @if($product->image)
-                                <img src="{{ asset('storage/' . $product->image) }}" 
-                                     alt="{{ $product->name }}" 
-                                     class="rounded" 
+                                <img src="{{ asset('storage/' . $product->image) }}"
+                                     alt="{{ $product->name }}"
+                                     class="rounded"
                                      style="width: 50px; height: 50px; object-fit: cover;">
                             @else
-                                <div class="bg-light rounded d-flex align-items-center justify-content-center" 
+                                <div class="bg-light rounded d-flex align-items-center justify-content-center"
                                      style="width: 50px; height: 50px;">
                                     <i class="bi bi-image text-muted"></i>
                                 </div>
@@ -83,7 +82,6 @@
                         </td>
                         <td>{{ $product->name }}</td>
                         <td><span class="badge bg-secondary">{{ $product->category->name }}</span></td>
-                        <td>{{ $product->price ? 'Rp ' . number_format($product->price, 0, ',', '.') : '-' }}</td>
                         <td>
                             @if($product->is_active)
                                 <span class="badge bg-success">Active</span>
@@ -101,7 +99,7 @@
                             <form action="{{ route('admin.products.destroy', $product) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" 
+                                <button type="submit" class="btn btn-sm btn-danger"
                                         onclick="return confirm('Are you sure?')">
                                     <i class="bi bi-trash"></i>
                                 </button>
@@ -116,7 +114,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <div class="mt-3">
             {{ $products->appends(request()->query())->links() }}
         </div>

@@ -13,7 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'otp.verified' => \App\Http\Middleware\EnsureOtpVerified::class,
+            'superadmin' => \App\Http\Middleware\SuperAdminOnly::class,
         ]);
+        $middleware->append(\App\Http\Middleware\CheckMaintenanceMode::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

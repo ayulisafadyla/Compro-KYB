@@ -4,13 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title class="notranslate">PT Kayaba Indonesia</title>
-    <link rel="icon" href="{{ asset('assets/img/kybputih.png') }}" type="image/png">
-
+    <title class="notranslate">{{ $site_settings['site_title'] ?? ($site_settings['site_name'] ?? 'PT Kayaba Indonesia') }}
+    </title>
+    <link rel="icon"
+        href="{{ isset($site_settings['site_favicon']) ? asset('storage/' . $site_settings['site_favicon']) : asset('assets/img/kybputih.png') }}"
+        type="image/png">
+    <meta name="description" content="{{ $site_settings['meta_description'] ?? '' }}">
+    <meta name="keywords" content="{{ $site_settings['meta_keywords'] ?? '' }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-
-    <!-- Google Fonts - Corporate Style -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -74,6 +76,9 @@
             background: #f8f8f8;
             transform: translateY(-2px);
         }
+
+
+
 
         .dropdown-item img {
             width: 22px;
@@ -156,6 +161,8 @@
                 padding: 20px;
                 border-top: 1px solid #eee;
             }
+
+
 
             .btn-login-toyota {
                 justify-content: center;
@@ -255,187 +262,23 @@
             margin: 8px 0;
             border-color: #f0f0f0;
         }
-    </style>
-</head>
 
-<body>
-
-    <nav class="navbar navbar-expand-lg navbar-kyb fixed-top shadow-sm">
-        <div class="container-fluid nav-container">
-            <a class="navbar-brand notranslate" href="/">
-                <img src="{{ asset('assets/img/kybLogo.png') }}" alt="KYB Logo">
-            </a>
-
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="/">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/#about">Tentang Kami</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/#products">Produk</a></li>
-                    <li class="nav-item dropdown event-dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="eventDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <span>Acara</span>
-                            <i class="bi bi-chevron-down ms-1"
-                                style="font-size: 0.75rem; transition: transform 0.3s ease;"></i>
-                        </a>
-                        <ul class="dropdown-menu event-dropdown-menu shadow border-0" aria-labelledby="eventDropdown">
-                            <li>
-                                <a class="dropdown-item event-dropdown-item" href="/event-launching">
-                                    <i class="bi bi-rocket-takeoff me-2" style="color: #eb0a1e;"></i>
-                                    <span>Acara Launching Produk</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item event-dropdown-item" href="/event-workshop">
-                                    <i class="bi bi-tools me-2" style="color: #eb0a1e;"></i>
-                                    <span>Acara Workshop & Training</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item event-dropdown-item" href="/event-promo">
-                                    <i class="bi bi-tag-fill me-2" style="color: #eb0a1e;"></i>
-                                    <span>Acara Promo & Diskon</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item event-dropdown-item" href="/event-pameran">
-                                    <i class="bi bi-building me-2" style="color: #eb0a1e;"></i>
-                                    <span>Acara Pameran Otomotif</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="https://hrd.kyb.co.id/recruitment/index.php">Pendaftaran</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/#contact">Kontak</a></li>
-                </ul>
-
-                <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-4">
-                    <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-globe me-1"></i> Bahasa
-                        </a>
-                        <ul class="dropdown-menu shadow border-0" aria-labelledby="languageDropdown">
-                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('id')">
-                                <img src="https://flagcdn.com/w20/id.png" class="me-2" style="width: 20px; border: 1px solid #eee;">Indonesia
-                            </a></li>
-                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">
-                                <img src="https://flagcdn.com/w20/gb.png" class="me-2" style="width: 20px; border: 1px solid #eee;">English
-                            </a></li>
-                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('ja')">
-                                <img src="https://flagcdn.com/w20/jp.png" class="me-2" style="width: 20px; border: 1px solid #eee;">Jepang
-                            </a></li>
-                        </ul>
-                    </div>
-
-                    <a href="/login" class="btn-login-toyota">
-                        <i class="bi bi-box-arrow-in-right"></i> Masuk
-                    </a>
-
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <main style="margin-top: 110px;">
-        @yield('content')
-    </main>
-
-    <!-- Footer Section -->
-    <footer id="footer" class="footer-dark">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row gy-4">
-                    <div class="col-lg-5 col-md-12 footer-about">
-                        <a href="/" class="logo d-flex align-items-center mb-3 text-decoration-none">
-                            <span class="brand-text">PT Kayaba Indonesia</span>
-                        </a>
-                        <p class="company-desc">
-                            Leading Manufacturer of Shock Absorbers & Hydraulic Equipment. Member of Astra Otoparts & KYB Corporation Japan.
-                        </p>
-                        <div class="social-links d-flex mt-4 gap-2">
-                            <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
-                            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-                            <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-                            <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-6 footer-links">
-                        <h4>Tautan Penting</h4>
-                        <ul class="list-unstyled">
-                            <li><i class="bi bi-chevron-right"></i> <a href="/">Beranda</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="/#about">Tentang Kami</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="/#products">Produk</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="/news">Berita & Acara</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="/career">Karir</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-2 col-6 footer-links">
-                        <h4>Layanan Kami</h4>
-                        <ul class="list-unstyled">
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Shock Absorber</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Hydraulic Equipment</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Motorcycle Parts</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Automotive Components</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Industrial Solutions</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-                        <h4>Hubungi Kami</h4>
-                        <p>
-                            <strong>PT Kayaba Indonesia</strong> <br>
-                            Jl. Jawa No.4, Blok II, Jatiwangi <br>
-                            Cikarang Barat, Bekasi 17530 <br>
-                            Indonesia <br><br>
-                            <strong>Phone:</strong> +62 21 8981456<br>
-                            <strong>Email:</strong> info@kyb.astra.co.id<br>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <hr style="border-top: 1px solid #fff; margin: 0 0 15px 0; opacity: 0.3;">
-
-        <div class="container footer-bottom clearfix">
-            <div class="copyright">
-                &copy; Copyright <strong><span>2026 PT Kayaba Indonesia</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-                Designed by <a href="#">MIS Dept KYB</a>
-            </div>
-        </div>
-    </footer>
-
-    <style>
         /* Footer Styling */
         .footer-dark {
-            background: #eb0a1e;
+            background: #212529;
             color: #fff;
             font-size: 14px;
             padding-top: 0;
         }
 
         .footer-dark .footer-top {
-            padding: 30px 0 15px 0;
-            background: #eb0a1e;
+            padding: 20px 0 10px 0;
+            background: #212529;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-dark .footer-about .brand-text {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             color: #fff;
             font-family: 'Poppins', sans-serif;
@@ -471,12 +314,12 @@
         }
 
         .footer-dark h4 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             color: #fff;
             position: relative;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
             font-family: 'Poppins', sans-serif;
         }
 
@@ -498,7 +341,7 @@
         }
 
         .footer-dark .footer-links ul li {
-            padding: 8px 0;
+            padding: 4px 0;
             display: flex;
             align-items: center;
         }
@@ -533,8 +376,8 @@
         }
 
         .footer-dark .footer-bottom {
-            padding-top: 15px;
-            padding-bottom: 15px;
+            padding-top: 10px;
+            padding-bottom: 10px;
             color: #fff;
             text-align: center;
             border-top: none;
@@ -567,9 +410,165 @@
             }
         }
     </style>
+</head>
 
+<body>
 
-    <!-- Google Translate Script -->
+    <nav class="navbar navbar-expand-lg navbar-kyb fixed-top shadow-sm">
+        <div class="container-fluid nav-container">
+            <a class="navbar-brand notranslate" href="/">
+                <img src="{{ isset($site_settings['site_logo']) ? asset('storage/' . $site_settings['site_logo']) : asset('assets/img/kybLogo.png') }}"
+                    alt="{{ $site_settings['site_title'] ?? 'KYB Logo' }}">
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#about">Tentang Kami</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#products">Produk</a></li>
+                    <li class="nav-item dropdown event-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="eventDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span>Pencapaian</span>
+                            <i class="bi bi-chevron-down ms-1"
+                                style="font-size: 0.75rem; transition: transform 0.3s ease;"></i>
+                        </a>
+                        <ul class="dropdown-menu event-dropdown-menu shadow border-0" aria-labelledby="eventDropdown">
+                            <li>
+                                <a class="dropdown-item event-dropdown-item" href="/sertificate">
+                                    <i class="bi bi-patch-check-fill me-2" style="color: #eb0a1e;"></i>
+                                    <span>Sertificate</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item event-dropdown-item" href="/penghargaan">
+                                    <i class="bi bi-trophy-fill me-2" style="color: #eb0a1e;"></i>
+                                    <span>Penghargaan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item event-dropdown-item" href="/event">
+                                    <i class="bi bi-calendar-event-fill me-2" style="color: #eb0a1e;"></i>
+                                    <span>Events</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="https://hrd.kyb.co.id/recruitment/index.php">Karir</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#contact">Kontak</a></li>
+                </ul>
+
+                <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-4">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-globe me-1"></i> Bahasa
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('id')">
+                                    <img src="https://flagcdn.com/w20/id.png" class="me-2"
+                                        style="width: 20px; border: 1px solid #eee;">Indonesia
+                                </a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">
+                                    <img src="https://flagcdn.com/w20/gb.png" class="me-2"
+                                        style="width: 20px; border: 1px solid #eee;">English
+                                </a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('ja')">
+                                    <img src="https://flagcdn.com/w20/jp.png" class="me-2"
+                                        style="width: 20px; border: 1px solid #eee;">Jepang
+                                </a></li>
+                        </ul>
+                    </div>
+
+                    <a href="/login" class="btn-login-toyota">
+                        <i class="bi bi-box-arrow-in-right"></i> Masuk
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main style="margin-top: 110px;">
+        @yield('content')
+    </main>
+
+    <!-- Footer Section -->
+    <footer id="footer" class="footer-dark">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-6 col-md-12 footer-about">
+                        <a href="/" class="logo d-flex align-items-center mb-3 text-decoration-none">
+                            <span
+                                class="brand-text">{{ $site_settings['site_title'] ?? ($site_settings['site_name'] ?? 'PT Kayaba Indonesia') }}</span>
+                        </a>
+                        <p class="company-desc" style="margin-top: 5px; font-size: 0.85rem;"> Leading Manufacturer of
+                            Shock Absorbers & Hydraulic Equipment. Member of Astra Otoparts & KYB Corporation Japan.
+                            <br>
+                            {{ $site_settings['site_description'] ?? 'Leading Manufacturer of Shock Absorbers & Hydraulic Equipment. Member of Astra Otoparts & KYB Corporation Japan.' }}
+                        </p>
+                        <div class="social-links d-flex mt-2 gap-2">
+                            @if (!empty($site_settings['social_facebook']))
+                                <a href="https://www.linkedin.com/company/ptkybi-kayaba-indonesia/"
+                                    class="social-icon" target="_blank"><i class="bi bi-linkedin"></i></a>
+                            @endif
+                            @if (!empty($site_settings['social_instagram']))
+                                <a href="https://www.instagram.com/pt.kyb.id/" class="social-icon" target="_blank"><i
+                                        class="bi bi-instagram"></i></a>
+                            @endif
+                            @if (!empty($site_settings['social_youtube']))
+                                <a href="https://www.youtube.com/@PT.KAYABAINDONESIA" class="social-icon"
+                                    target="_blank"><i class="bi bi-youtube"></i></a>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-6 footer-links">
+                        <h4>Tautan Penting</h4>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-chevron-right"></i> <a href="/">Beranda</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="/#about">Tentang Kami</a></li>
+                            <li><i class="bi bi-chevron-right"></i> <a href="/#products">Produk</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+                        <h4>Hubungi Kami</h4>
+                        <p>
+                            <strong>{{ $site_settings['site_title'] ?? ($site_settings['site_name'] ?? 'PT Kayaba Indonesia') }}</strong>
+                            <br>
+                            {!! nl2br(
+                                e(
+                                    $site_settings['contact_address'] ??
+                                        "Jl. Jawa No.4, Blok II, Jatiwangi\nCikarang Barat, Bekasi 17530\nIndonesia",
+                                ),
+                            ) !!} <br><br>
+                            <strong>Phone:</strong> {{ $site_settings['contact_phone'] ?? '+62 21 8981456' }}<br>
+                            <strong>Email:</strong> {{ $site_settings['contact_email'] ?? 'info@kyb.astra.co.id' }}<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-bottom clearfix">
+            <div class="copyright">
+                &copy; Copyright
+                2026 <strong><span>{{ $site_settings['site_title'] ?? ($site_settings['site_name'] ?? 'PT Kayaba Indonesia') }}</span></strong>.
+                All Rights Reserved
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <div id="google_translate_element" style="display:none;"></div>
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -580,7 +579,8 @@
             }, 'google_translate_element');
         }
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
 
     <script>
         function changeLanguage(lang) {
@@ -592,7 +592,20 @@
         }
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @if (isset($site_settings['google_analytics']) && $site_settings['google_analytics'])
+        <!-- Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $site_settings['google_analytics'] }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', '{{ $site_settings['google_analytics'] }}');
+        </script>
+    @endif
+
 </body>
 
 </html>

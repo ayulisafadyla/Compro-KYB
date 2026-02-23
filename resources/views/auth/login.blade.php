@@ -1,11 +1,131 @@
 @extends('layouts.guest')
 
 @section('content')
+
+<style>
+    /* Full Screen Background */
+        .body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* ===== BACKGROUND CONTAINER ===== */
+    .login-container {
+        min-height: 100vh;
+        width: 100%;
+        background: url('{{ asset('assets/img/kyb1.png') }}') no-repeat center center;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    /* Light overlay supaya teks tetap terbaca tapi background jelas */
+    .login-container::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.15);
+        z-index: 0;
+    }
+
+    /* ===== CARD ===== */
+    .glass-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 420px;
+        background: #ffffff;
+        border-radius: 32px;
+        padding: 40px 32px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* ===== TITLE ===== */
+    .glass-card h2 {
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 25px;
+    }
+
+    /* ===== INPUT FIELD ===== */
+    .glass-input {
+        background: #f7f8fa !important;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        padding: 12px 14px 12px 45px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.25s ease;
+    }
+
+    .glass-input:focus {
+        background: #ffffff !important;
+        border-color: #eb0a1e;
+        box-shadow: 0 0 0 4px rgba(235, 10, 30, 0.1);
+    }
+
+    .glass-input::placeholder {
+        color: #9ca3af;
+        font-weight: 400;
+    }
+
+    /* ===== ICON POSITION ===== */
+    .position-relative i {
+        font-size: 16px;
+        color: #9ca3af !important;
+    }
+
+    /* ===== CAPTCHA BOX ===== */
+    canvas {
+        border-radius: 12px;
+    }
+
+    /* ===== RELOAD BUTTON ===== */
+    #reload-captcha {
+        border-radius: 12px !important;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* ===== LOGIN BUTTON ===== */
+    .glass-btn {
+        background: linear-gradient(135deg, #eb0a1e, #d60018);
+        border: none;
+        border-radius: 16px;
+        padding: 14px;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+    }
+
+    .glass-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 30px rgba(235, 10, 30, 0.35);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+        .glass-card {
+            padding: 30px 22px;
+            border-radius: 24px;
+        }
+    }
+</style>
+
 <div class="login-container">
     <div class="glass-card">
         <div class="text-center mb-3">
-            <img src="{{ asset ('images/kyb-remove2.png') }}" alt="Logo" style="width: 180px;" class="mb-2">
-            <h2 class="text-danger fw-bold fs-5">Sign In</h2>
+            <img src="{{ asset ('assets/img/kyb-remove2.png') }}" alt="Logo" style="width: 190px;" class="mb-2">
+            <h5 class="text-danger fw-bold fs-5">Sign In</h5>
         </div>
 
         <form method="POST" action="{{ route('login') }}" autocomplete="off">
@@ -140,123 +260,4 @@
     });
 </script>
 
-<style>
-    /* Full Screen Background */
-     .body {
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-        font-family: 'Segoe UI', sans-serif;
-    }
-
-    /* ===== BACKGROUND CONTAINER ===== */
-    .login-container {
-        min-height: 100vh;
-        width: 100%;
-        background: url('{{ asset('assets/img/kyb1.png') }}') no-repeat center center;
-        background-size: cover;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-    }
-
-    /* Light overlay supaya teks tetap terbaca tapi background jelas */
-    .login-container::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.15);
-        z-index: 0;
-    }
-
-    /* ===== CARD ===== */
-    .glass-card {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-        max-width: 420px;
-        background: #ffffff;
-        border-radius: 32px;
-        padding: 40px 32px;
-        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
-        border: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    /* ===== TITLE ===== */
-    .glass-card h2 {
-        font-weight: 700;
-        letter-spacing: 1px;
-        margin-bottom: 25px;
-    }
-
-    /* ===== INPUT FIELD ===== */
-    .glass-input {
-        background: #f7f8fa !important;
-        border: 1px solid #e5e7eb;
-        border-radius: 14px;
-        padding: 12px 14px 12px 45px;
-        font-size: 14px;
-        font-weight: 500;
-        transition: all 0.25s ease;
-    }
-
-    .glass-input:focus {
-        background: #ffffff !important;
-        border-color: #eb0a1e;
-        box-shadow: 0 0 0 4px rgba(235, 10, 30, 0.1);
-    }
-
-    .glass-input::placeholder {
-        color: #9ca3af;
-        font-weight: 400;
-    }
-
-    /* ===== ICON POSITION ===== */
-    .position-relative i {
-        font-size: 16px;
-        color: #9ca3af !important;
-    }
-
-    /* ===== CAPTCHA BOX ===== */
-    canvas {
-        border-radius: 12px;
-    }
-
-    /* ===== RELOAD BUTTON ===== */
-    #reload-captcha {
-        border-radius: 12px !important;
-        width: 45px;
-        height: 45px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* ===== LOGIN BUTTON ===== */
-    .glass-btn {
-        background: linear-gradient(135deg, #eb0a1e, #d60018);
-        border: none;
-        border-radius: 16px;
-        padding: 14px;
-        font-size: 15px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        transition: all 0.3s ease;
-    }
-
-    .glass-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 15px 30px rgba(235, 10, 30, 0.35);
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-        .glass-card {
-            padding: 30px 22px;
-            border-radius: 24px;
-        }
-    }
-</style>
-</style>
 @endsection

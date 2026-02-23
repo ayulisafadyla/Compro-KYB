@@ -1,11 +1,11 @@
 @extends('layouts.app')
-
 @section('content')
+
 <style>
     main {
         margin-top: 0 !important;
     }
-    
+
     .hero-carousel {
         position: relative;
         width: 100vw;
@@ -13,7 +13,7 @@
         margin-left: calc(-50vw + 50%);
         overflow: hidden;
     }
-    
+
     .carousel-slide {
         position: absolute;
         top: 0;
@@ -26,12 +26,12 @@
         background-position: center;
         background-repeat: no-repeat;
     }
-    
+
     .carousel-slide.active {
         opacity: 1;
         animation: fadeIn 1.5s ease-in-out;
     }
-    
+
     .carousel-overlay {
         position: absolute;
         top: 0;
@@ -40,7 +40,7 @@
         height: 100%;
         background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(235, 10, 30, 0.5) 100%);
     }
-    
+
     .carousel-content {
         position: absolute;
         top: 50%;
@@ -52,7 +52,7 @@
         width: 90%;
         max-width: 1000px;
     }
-    
+
     .carousel-subtitle {
         font-size: 1.2rem;
         font-weight: 600;
@@ -62,7 +62,7 @@
         opacity: 0;
         animation: slideUpFade 1.2s ease-out 0.2s forwards;
     }
-    
+
     .carousel-title {
         font-size: 4.5rem;
         font-weight: 900;
@@ -72,7 +72,7 @@
         opacity: 0;
         animation: slideUpFade 1.2s ease-out 0.5s forwards;
     }
-    
+
     .carousel-description {
         font-size: 1.3rem;
         font-weight: 300;
@@ -80,7 +80,7 @@
         opacity: 0;
         animation: slideUpFade 1.2s ease-out 0.8s forwards;
     }
-    
+
     .carousel-btn {
         background: #eb0a1e;
         color: white;
@@ -95,14 +95,14 @@
         opacity: 0;
         animation: slideUpFade 1.2s ease-out 1.1s forwards;
     }
-    
+
     .carousel-btn:hover {
         background: white;
         color: #eb0a1e;
         transform: translateY(-5px);
         box-shadow: 0 12px 35px rgba(255, 255, 255, 0.4);
     }
-    
+
     /* Navigation Buttons */
     .carousel-nav {
         position: absolute;
@@ -123,21 +123,21 @@
         justify-content: center;
         box-shadow: 0 4px 15px rgba(235, 10, 30, 0.4);
     }
-    
+
     .carousel-nav:hover {
         background: #c00818;
         transform: translateY(-50%) scale(1.15);
         box-shadow: 0 8px 25px rgba(235, 10, 30, 0.7);
     }
-    
+
     .carousel-nav.prev {
         left: 30px;
     }
-    
+
     .carousel-nav.next {
         right: 30px;
     }
-    
+
     /* Indicators */
     .carousel-indicators {
         position: absolute;
@@ -148,7 +148,7 @@
         display: flex;
         gap: 12px;
     }
-    
+
     .indicator {
         width: 12px;
         height: 12px;
@@ -157,13 +157,13 @@
         cursor: pointer;
         transition: all 0.3s ease;
     }
-    
+
     .indicator.active {
         background: white;
         width: 40px;
         border-radius: 6px;
     }
-    
+
     @keyframes fadeIn {
         from {
             opacity: 0;
@@ -172,7 +172,7 @@
             opacity: 1;
         }
     }
-    
+
     @keyframes slideUpFade {
         from {
             opacity: 0;
@@ -183,7 +183,7 @@
             transform: translateY(0);
         }
     }
-    
+
     @media (max-width: 768px) {
         .carousel-title {
             font-size: 2.5rem;
@@ -219,7 +219,7 @@
             <a href="#products" class="carousel-btn" data-translate="hero_explore">Jelajahi Produk</a>
         </div>
     </div>
-    
+
     <!-- Slide 2 -->
     <div class="carousel-slide" style="background-image: url('{{ asset('assets/img/perusahaan.jpg') }}');">
         <div class="carousel-overlay"></div>
@@ -230,7 +230,7 @@
             <a href="#about" class="carousel-btn" data-translate="hero_contact">Hubungi Kami</a>
         </div>
     </div>
-    
+
     <!-- Slide 3 -->
     <div class="carousel-slide" style="background-image: url('{{ asset('assets/img/perusahaan.jpg') }}');">
         <div class="carousel-overlay"></div>
@@ -241,7 +241,7 @@
             <a href="#contact" class="carousel-btn" data-translate="hero_contact">Hubungi Kami</a>
         </div>
     </div>
-    
+
     <!-- Navigation Buttons -->
     <button class="carousel-nav prev" onclick="changeSlide(-1)">
         <i class="bi bi-chevron-left"></i>
@@ -249,7 +249,7 @@
     <button class="carousel-nav next" onclick="changeSlide(1)">
         <i class="bi bi-chevron-right"></i>
     </button>
-    
+
     <!-- Indicators -->
     <div class="carousel-indicators">
         <span class="indicator active" onclick="goToSlide(0)"></span>
@@ -263,18 +263,18 @@
     const slides = document.querySelectorAll('.carousel-slide');
     const indicators = document.querySelectorAll('.indicator');
     let autoSlideInterval;
-    
+
     function showSlide(index) {
         slides.forEach(slide => slide.classList.remove('active'));
         indicators.forEach(ind => ind.classList.remove('active'));
-        
+
         if (index >= slides.length) currentSlide = 0;
         if (index < 0) currentSlide = slides.length - 1;
-        
+
         slides[currentSlide].classList.add('active');
         indicators[currentSlide].classList.add('active');
     }
-    
+
     function changeSlide(direction) {
         currentSlide += direction;
         if (currentSlide >= slides.length) currentSlide = 0;
@@ -282,27 +282,27 @@
         showSlide(currentSlide);
         resetAutoSlide();
     }
-    
+
     function goToSlide(index) {
         currentSlide = index;
         showSlide(currentSlide);
         resetAutoSlide();
     }
-    
+
     function autoSlide() {
         currentSlide++;
         if (currentSlide >= slides.length) currentSlide = 0;
         showSlide(currentSlide);
     }
-    
+
     function resetAutoSlide() {
         clearInterval(autoSlideInterval);
         autoSlideInterval = setInterval(autoSlide, 5000);
     }
-    
+
     // Auto slide every 5 seconds
     autoSlideInterval = setInterval(autoSlide, 5000);
-    
+
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
         if (e.key === 'ArrowLeft') changeSlide(-1);

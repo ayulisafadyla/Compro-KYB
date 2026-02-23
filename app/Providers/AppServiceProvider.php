@@ -19,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        \Illuminate\Pagination\Paginator::useBootstrapFive();
+
+        if (\Illuminate\Support\Facades\Schema::hasTable('site_settings')) {
+            $site_settings = \App\Models\SiteSetting::all()->pluck('value', 'key');
+            \Illuminate\Support\Facades\View::share('site_settings', $site_settings);
+        }
     }
 }
