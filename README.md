@@ -1,59 +1,90 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏢 Compro KYB — Corporate Website & CMS
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Vite](https://img.shields.io/badge/Vite-7.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-## About Laravel
+**Compro KYB** is a modern, responsive Company Profile web application and dynamic Content Management System (CMS) built for **PT Kayaba Indonesia (KYB)**. It showcases company profile information, product catalogs, achievements, awards, event highlights, and provides a secure, role-based administrative control panel with 2-Factor OTP verification.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Features & Modules
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🌐 Public Portal
+- **Hero & Landing Page**: Dynamic banners, company philosophy, video highlights, and featured about sections.
+- **Product Catalog**: Multi-category product showcase with brand filtering and detail views.
+- **Achievements & Events**: Interactive showcase for company certificates, awards (*penghargaan*), and corporate events.
+- **Global Search**: Instant search across products, events, and company content.
+- **Responsive Design**: Fully responsive layout built with modern Tailwind CSS v4.
 
-## Learning Laravel
+### 🛡️ Admin Management System (CMS)
+- **Secure Authentication & OTP**: 2-Factor authentication (OTP verification) required for administrative access.
+- **Role-Based Access Control (RBAC)**: Fine-grained permissions (Super Admin, Administrator, Content Editor).
+- **Homepage CMS**: Manage sliders/banners, philosophy text, embedded video highlights, and gallery images.
+- **Product Catalog CMS**: Manage categories, products, and brand listings.
+- **Events & Achievements CMS**: Manage corporate events, certificates, and awards.
+- **Static Content CMS**: FAQs, company policy sections, about pages, and contact items.
+- **Security & User Management**: Manage system users, roles, permissions, and security settings.
+- **Audit Logging**: Comprehensive activity logs and user login history tracking.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠️ Tech Stack
 
-## Laravel Sponsors
+- **Backend Framework**: [Laravel 12.x](https://laravel.com)
+- **Language**: PHP 8.2+
+- **Frontend Assets**: Blade Templating, [Tailwind CSS v4](https://tailwindcss.com), [Vite 7.x](https://vitejs.dev)
+- **Database**: SQLite (default) / MySQL / PostgreSQL
+- **Security & Authentication**: Laravel Built-in Auth + Custom OTP Verification Middleware + Permission Matrix
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 🚀 Getting Started
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Follow these steps to set up and run the project on your local environment.
 
-## Contributing
+### Prerequisites
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Ensure you have the following installed on your machine:
+- **PHP** `>= 8.2`
+- **Composer** `>= 2.x`
+- **Node.js** `>= 18.x` & **NPM**
+- **SQLite** or **MySQL**
 
-## Code of Conduct
+## 🔑 Default Credentials
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+After seeding the database with `SecuritySeeder`, you can log in using the following default accounts:
 
-## Security Vulnerabilities
+| Role | Username | Password |
+| :--- | :--- | :--- |
+| **Super Administrator** | `240215` | `password` |
+| **Test Administrator** | `admin_test` | `password` |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+> ⚠️ **Important**: Please change the default passwords immediately upon deployment to a production environment.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📁 Project Directory Structure
+
+```text
+Compro-KYB/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Admin/         # CMS Management Controllers
+│   │   │   └── Auth/          # Login & OTP Verification Controllers
+│   │   └── Middleware/        # Auth & Permission Middlewares
+│   └── Models/                # Eloquent Data Models
+├── database/
+│   ├── migrations/            # Database Schema Migrations
+│   └── seeders/               # Security & Initial Site Content Seeders
+├── public/                    # Webroot & Uploaded Assets
+├── resources/
+│   ├── css/                   # Tailwind CSS Configurations & Styles
+│   ├── js/                    # Application JS Scripts
+│   └── views/                 # Blade Templates (Public & Admin UI)
+├── routes/
+│   └── web.php                # Application Web Routes
+└── vite.config.js             # Vite Build Configuration
